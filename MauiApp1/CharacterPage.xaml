@@ -1,0 +1,83 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.CharacterPage">
+
+    <Grid Padding="20">
+        <!-- Row definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <!-- Ensures that the last row takes up remaining space -->
+        </Grid.RowDefinitions>
+
+        <!-- Column definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!-- First column takes up remaining space -->
+            <ColumnDefinition Width="*" />
+            <!-- Second column takes up remaining space -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Pierwsza kolumna - dodawanie postaci -->
+        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Padding="20" HorizontalOptions="Start" Margin="0,30,0,0">
+            <Label Text="Dodaj nową postać" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <!-- Przycisk do wyboru obrazu -->
+            <Button Text="Wybierz obraz" Clicked="OnPickImageClicked" WidthRequest="500" Margin="0,30,0,0"/>
+
+            <!-- Podgląd wybranego obrazu -->
+            <Image x:Name="CharacterImage" HeightRequest="200" Aspect="AspectFit" Margin="0,30,0,0"/>
+
+            <!-- Pole na nazwę postaci -->
+            <Entry x:Name="CharacterNameEntry" Placeholder="Wpisz nazwę postaci" WidthRequest="500" Margin="0,30,0,0"/>
+
+            <!-- Przycisk do zapisania postaci -->
+            <Button Text="Dodaj postać" Clicked="OnSaveCharacterClicked" WidthRequest="500" Margin="0,30,0,0"/>
+        </VerticalStackLayout>
+
+        
+        <!-- Druga kolumna - lista postaci -->
+        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Padding="20" HorizontalOptions="Center" Margin="0,30,0,0">
+            <Label Text="Lista postaci" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20"/>
+            <Button Text="Odśwież listę" Clicked="ResetList" WidthRequest="200"></Button>
+            <!-- CollectionView for displaying characters -->
+            <CollectionView x:Name="CharacterListView" ItemsSource="{Binding Characters}" Margin="0,30,0,0" HeightRequest="460">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <!-- Image for the character -->
+                            <Image Source="trash.png" WidthRequest="50" HeightRequest="50" Margin="0,10,25,0">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="DeleteCharacter">
+                                        <TapGestureRecognizer.CommandParameter>
+                                            <Binding />
+                                        </TapGestureRecognizer.CommandParameter>
+                                    </TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Grid WidthRequest="100" HeightRequest="100" Margin="0,15,25,0">
+                                <!-- Image inside the grid with AspectFill to crop -->
+                                <Image 
+                                    Source="{Binding ImagePath}" 
+                                    Aspect="AspectFill"/>
+                            </Grid>
+
+                            <!-- Label for the character's name -->
+                            <Label 
+                                Text="{Binding Name}" 
+                                VerticalOptions="Center" 
+                                FontSize="25"
+                                FontAttributes="Bold"/>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+        
+        
+    </Grid>
+</ContentPage>

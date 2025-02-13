@@ -1,0 +1,94 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.QuestionDetailPage">
+
+    <VerticalStackLayout Padding="20" BackgroundColor="WhiteSmoke">
+        <Label 
+            Text="{Binding Title}" 
+            FontSize="35" 
+            FontAttributes="Bold" 
+            HorizontalOptions="Center"
+            Margin="0,0,500,20"
+            TextColor="Black"/>
+
+        <CollectionView ItemsSource="{Binding Answers}" HeightRequest="800" Margin="0,0,0,0">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+                    <Grid ColumnDefinitions="1*, 4*, 1*, 1*" ColumnSpacing="6">
+                        <Label 
+                               Grid.Column="0"
+                               Text="{Binding answerText}" 
+                               FontSize="18"
+                               VerticalTextAlignment="Center"
+                               Margin="15,5"
+                               TextColor="Black"
+                               FontAttributes="Bold"/>
+        
+                        <BoxView HeightRequest="3" BackgroundColor="Black" Margin="0,-147,0,0" Grid.ColumnSpan="2"/>
+                        <BoxView Grid.ColumnSpan="2" HeightRequest="3" BackgroundColor="Black" Margin="0,150,0,0"/>
+
+                        <BoxView VerticalOptions="Center" HeightRequest="150" WidthRequest="3" Margin="260,-0,0,0" BackgroundColor="Black"/>
+                        <BoxView VerticalOptions="Center" HeightRequest="150" WidthRequest="3" Margin="-280,0,0,0" BackgroundColor="Black" Grid.Column="2"/>
+                        <BoxView VerticalOptions="Center" HeightRequest="150" WidthRequest="3" Margin="-265,0,0,0" BackgroundColor="Black" Grid.Column="0"/>
+
+                        <!-- StackLayout to hold the selected characters -->
+                        <CollectionView 
+                                Grid.Column="1" 
+                                ItemsSource="{Binding Characters}"
+                                ItemsLayout="HorizontalList">
+
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Frame WidthRequest="120" HeightRequest="120"
+                                                CornerRadius="10" Padding="0"
+                                                HasShadow="False" BorderColor="White"
+                                                Margin="20,0,0,0">
+                                            <Grid WidthRequest="120" HeightRequest="120">
+                                                <Image Source="{Binding ImagePath}"                                                                                             
+                                                        Aspect="AspectFill"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="DeleteCharacter">
+                                                            <TapGestureRecognizer.CommandParameter>
+                                                                <Binding />
+                                                            </TapGestureRecognizer.CommandParameter>
+                                                        </TapGestureRecognizer>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Grid>
+                                        </Frame>
+                                        <!-- Tutaj można wyświetlić nazwę postaci w charcie-->
+                                        <!-- <Label Text="{Binding Name}" FontSize="16" HorizontalOptions="Center" TextColor="Black"/> -->
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <!-- Przycisk do przypisania postaci -->
+                        <Button 
+                               Grid.Column="2"
+                               Text="Assign new character"
+                               FontSize="20"
+                               VerticalOptions="Center"
+                               Clicked="OnAddCharacterClicked"
+                               WidthRequest="350"
+                               BackgroundColor="DarkGreen"                              
+                               TextColor="White"
+                               CornerRadius="15"
+                               FontAttributes="Bold"
+                               Margin="260,0,0,0"/>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

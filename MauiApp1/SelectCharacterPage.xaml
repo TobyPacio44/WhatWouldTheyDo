@@ -1,0 +1,57 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.SelectCharacterPage">
+
+    <VerticalStackLayout Padding="20" Margin="300">
+        <Label 
+            Text="Choose Character" 
+            FontSize="35" 
+            FontAttributes="Bold" 
+            HorizontalOptions="Center"
+            Margin="0,0,0,20"/>
+
+        <Picker x:Name="CharacterPicker" 
+                ItemsSource="{Binding Characters}"
+                SelectedItem="{Binding SelectedCharacter}" 
+                ItemDisplayBinding="{Binding Name}"
+                Margin="0,0,0,20"
+                WidthRequest="500"
+                HeightRequest="80"
+                FontSize="20">
+        </Picker>
+
+        <Button 
+            Text="Wybierz" 
+            Clicked="OnCharacterSelected" 
+            Margin="0,20,0,0"
+            WidthRequest="200"
+            BackgroundColor="ForestGreen"/>
+
+        <Button 
+            Text="Anuluj" 
+            Clicked="OnCancelSelection" 
+            Margin="0,20,0,0"
+            WidthRequest="150"
+            BackgroundColor="IndianRed"/>
+
+        <!-- Sekcja z wybraną postacią -->
+        <Grid x:Name="CharacterGrid" IsVisible="False" Margin="0,20,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image x:Name="CharacterImage" 
+                   Grid.Row="0" 
+                   WidthRequest="100" 
+                   HeightRequest="100" 
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center"/>
+
+            <Label x:Name="CharacterNameLabel" 
+                   Grid.Row="1" 
+                   FontSize="20" 
+                   HorizontalOptions="Center"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

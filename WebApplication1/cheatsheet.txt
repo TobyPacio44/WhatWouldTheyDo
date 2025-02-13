@@ -1,0 +1,8 @@
+ASP .NET Core Web App
+
+Install-Package Microsoft.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Install-Package Microsoft.EntityFrameworkCore.Sqlite
+
+Add-Migration InitialCreate
+Update-Database
