@@ -31,8 +31,3 @@ secrets.json
 .platforms/
 Resources/
 
-# Ignore SQLite database (if generated at runtime)
-*.db
-*.db-wal
-*.db-shm
-*.db-journal
