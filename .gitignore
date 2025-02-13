@@ -1,0 +1,38 @@
+# Ignore build and binary files
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.apk
+*.aab
+*.ipa
+*.nupkg
+
+# Ignore user-specific settings
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+
+# Ignore temporary files
+*.log
+*.lock
+*.tmp
+*.cache
+
+# Ignore secrets (DO NOT upload environment files)
+appsettings.*.json
+secrets.json
+
+# Ignore MAUI-specific files
+.platforms/
+Resources/
+
+# Ignore SQLite database (if generated at runtime)
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
